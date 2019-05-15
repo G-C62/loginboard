@@ -2,7 +2,7 @@
 
 from loginboard.loginboard_blueprint import loginboard
 
-@loginboard.route('/')
+@loginboard.route('/hello')
 def hello_flask():
     return 'hello world'
 
