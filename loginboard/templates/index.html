@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block js %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+  <div>
+    <h2>메인입니다</h2>
+  </div>
+  <div>
+    {% if userid %}
+      <h3>환영합니다 {{ userid }} 님</h3>
+    {% else %}
+      <h3>환영합니다 로그인 또는 회원가입 후 서비스를 이용해주세요</h3>
+    {% endif%}
+  </div>
+{#
+  {% if flash %}
+    <h3>에러다!</h3>
+    <script>alert_error({{ flash }})</script>
+  {% endif %}
+#}
+{% with msges = get_flashed_messages() %}
+            {% if msges %}
+                {% for msg in msges %}
+                <script>alert('{{ msg.decode('utf-8')  }}')</script>
+                {% endfor %}
+            {%  endif %}
+{% endwith %}
+  <!-- 버튼 구간 -->
+  <div>
+    <button type="button" class="btn btn-primary login">로그인</button>
+      <button type="button" class="btn btn-success register" data-toggle="modal" data-target="#registerModal">회원가입</button>
+  </div>
+
+  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registModalLabel">회원가입</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ url_for('loginboard.register') }}" method="post">
+            <div class="form-group">
+              <!-- username -->
+              <label for="register-username" class="col-form-label">이름</label>
+              <input type="text" class="form-control" id="register-username" name="username">
+            </div>
+            <!-- 중복검사 버튼 -->
+            <div class="form-group">
+              <button type="button" class="btn btn-info" data-dismiss="modal">중복검사</button>
+            </div>
+            <div class="form-group">
+              <!-- passowrd -->
+              <label for="register-password" class="col-form-label">비밀번호</label>
+              <input type="password" class="form-control" id="register-password" name="password">
+            </div><div class="form-group">
+              <!-- passowrd -->
+              <label for="register-checkpassword" class="col-form-label">비밀번호 확인</label>
+              <input type="password" class="form-control" id="register-checkpassword" name="checkpassword">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">전송</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
