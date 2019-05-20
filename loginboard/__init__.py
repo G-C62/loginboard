@@ -3,14 +3,14 @@
 import os
 from flask import Flask
 
-def create_app(config_filepath='resource/config.cfg'):
+def create_app():
 
     loginboard_app = Flask(__name__)
 
     # 환경설정 파일들 경로 설정
     from loginboard.loginboard_config import LoginboardConfig
     loginboard_app.config.from_object(LoginboardConfig)
-    loginboard_app.config.from_pyfile(config_filepath, silent=True)
+    # loginboard_app.config.from_pyfile(config_filepath, silent=True)
 
     # DB연동
     from loginboard.database import DBManager

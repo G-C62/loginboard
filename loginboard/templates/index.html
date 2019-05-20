@@ -25,7 +25,7 @@
 {% with msges = get_flashed_messages() %}
             {% if msges %}
                 {% for msg in msges %}
-                <script>alert('{{ msg.decode('utf-8')  }}')</script>
+                <script>alert('{{ msg }}')</script>
                 {% endfor %}
             {%  endif %}
 {% endwith %}
