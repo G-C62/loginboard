@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from loginboard.loginboard_blueprint import loginboard
-from flask import render_template, redirect, url_for, request, flash, session
+from flask import render_template, redirect, url_for, request, flash, session, jsonify
 from loginboard.model.user import User
 from werkzeug import generate_password_hash
 from loginboard.database import dao
@@ -21,7 +21,29 @@ def user_validation(register_request):
 
     return user
 
-@loginboard.route('/register', methods=['GET', 'POST'])
+
+def __get_user(username):
+    try:
+        current_user = dao.query(User). \
+            filter_by(username=username). \
+            first()
+
+        return current_user
+
+    except Exception as e:
+
+        raise e
+
+@loginboard.route('/user/check_name', methods=['POST'])
+def check_name():
+    username = request.json['username']
+    #: DB에서 username 중복 확인
+    if __get_user(username):
+        return jsonify(result=False)
+    else:
+        return jsonify(result=True)
+
+@loginboard.route('/register', methods=['POST'])
 def register():
 
 

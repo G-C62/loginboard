@@ -1,9 +1,13 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-
 from loginboard.model import Base
 
-class User(Base):
+from flask_login.mixins import UserMixin
+from .. import login_manager
+
+
+
+class User(UserMixin, Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
@@ -16,3 +20,8 @@ class User(Base):
 
     def __repr__(self):
         return '<User %r %r %r>' % (self.id, self.username, self.password)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))

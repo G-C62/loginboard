@@ -4,7 +4,7 @@ class LoginboardConfig(object):
     #: 데이터베이스 연결 URL
     DB_URL= 'sqlite:///'
     #: 데이터베이스 파일 경로
-    DB_FILE_PATH = 'resource/database/loginboard'
+    DB_FILE_PATH = 'resource/database/loginboard.sqlite'
     #: 디폴트 SQLAlchemy trace log 설정
     DB_LOG_FLAG = 'True'
     #: 업로드되는 사진의 최대 크키(3메가)
