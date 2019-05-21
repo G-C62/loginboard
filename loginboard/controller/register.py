@@ -3,7 +3,7 @@
 from loginboard.loginboard_blueprint import loginboard
 from flask import render_template, redirect, url_for, request, flash, session, jsonify
 from loginboard.model.user import User
-from werkzeug import generate_password_hash
+from werkzeug.security import generate_password_hash
 from loginboard.database import dao
 
 

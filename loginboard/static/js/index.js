@@ -1,9 +1,7 @@
 $(function(){
     is_check = false;
-    $('button.login').click(function(){
-        //부트박스 띄우기
-        alert('login');
-    });
+
+
 
     //처음 회원가입버튼 클릭시
     $('button[data-target="#registerModal"]').on('click',function(event){
@@ -18,15 +16,18 @@ $(function(){
         var modal = $(this);
     })
 
+    //로그인 모달 이벤트
+    $('#loginModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var modal = $(this);
+    })
+
     //error alert이벤트
     function alert_error(error){
         bootbox.alert(error)
     }
 
-    /*function check_register(){
-        return is_check;
-    }*/
-
+    //submit전 유효성검사 이벤트
     $('#register-form').on('submit',function(event){
         username = $('input[name=username]').val();
         password = $('input[name=password]').val();
@@ -51,7 +52,7 @@ $(function(){
             bootbox.alert('전송되었습니다.');
             return;
         }
-        bootbox.alert('실패');
+        bootbox.alert('전송조건이 부족합니다.');
         event.preventDefault();
 
     })
@@ -106,5 +107,6 @@ $(function(){
     	  });
       }
     })
+
 
 })

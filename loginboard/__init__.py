@@ -6,6 +6,7 @@ from flask import Flask
 # Flask-login초기화
 from flask_login.login_manager import LoginManager
 
+
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
@@ -38,6 +39,9 @@ def create_app():
 
     from loginboard.loginboard_blueprint import loginboard
     loginboard_app.register_blueprint(loginboard)
+
+    # 로그인 매니저 초기화
+    login_manager.init_app(loginboard_app)
 
     # 로그인 관련 블루프린트 부착
     from .auth import auth as auth_blueprint

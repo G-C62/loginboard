@@ -11,7 +11,18 @@
   </div>
   <div>
     {% if userid %}
+
+    <div>
       <h3>환영합니다 {{ userid }} 님</h3>
+      <button type="button" class="btn btn-danger logout">Logout</button>
+    </div>
+    <script>
+      $(function(){
+        $('.logout').on('click',function(event){
+           location.href = '{{ url_for("auth.logout") }}';
+        });
+      })
+    </script>
     {% else %}
       <h3>환영합니다 로그인 또는 회원가입 후 서비스를 이용해주세요</h3>
     {% endif%}
@@ -31,10 +42,11 @@
 {% endwith %}
   <!-- 버튼 구간 -->
   <div>
-    <button type="button" class="btn btn-primary login">로그인</button>
+    <button type="button" class="btn btn-primary login" data-toggle="modal" data-target="#loginModal">로그인</button>
       <button type="button" class="btn btn-success register" data-toggle="modal" data-target="#registerModal">회원가입</button>
   </div>
 
+<!-- 회원가입 모달 -->
   <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
     <div class="modal-dialog" role="document" id="modal-regist">
       <div class="modal-content">
@@ -60,7 +72,7 @@
               <label for="register-password" class="col-form-label">비밀번호</label>
               <input type="password" class="form-control" id="register-password" name="password">
             </div><div class="form-group">
-              <!-- passowrd -->
+              <!-- passowrd 확인-->
               <label for="register-checkpassword" class="col-form-label">비밀번호 확인</label>
               <input type="password" class="form-control" id="register-checkpassword" name="checkpassword">
             </div>
@@ -74,5 +86,39 @@
       </div>
     </div>
   </div>
+
+<!-- 로그인 모달 -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
+    <div class="modal-dialog" role="document" id="modal-login">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">회원가입</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ url_for('auth.login') }}" method="post" id="login-form">
+            <div class="form-group">
+              <!-- username -->
+              <label for="login-username" class="col-form-label">이름</label>
+              <input type="text" class="form-control" id="login-username" name="username">
+            </div>
+            <div class="form-group">
+              <!-- passowrd -->
+              <label for="login-password" class="col-form-label">비밀번호</label>
+              <input type="password" class="form-control" id="login-password" name="password">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">전송</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 
 {% endblock %}
