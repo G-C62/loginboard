@@ -16,6 +16,11 @@ class User(Base):
     username = Column(String(50), unique=True)
     password = Column(String(55), unique=False)
 
+    posts = relationship('Post',
+                          backref='user',
+                          cascade='all, delete, delete-orphan')
+
+
     def __init__(self, name,  password):
         self.username = name
         self.password = password

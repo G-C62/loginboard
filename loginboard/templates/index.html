@@ -16,15 +16,27 @@
       <h3>환영합니다 {{ userid }} 님</h3>
       <button type="button" class="btn btn-danger logout">Logout</button>
     </div>
+    <div>
+      <button type="button" class="btn btn-info board">게시판</button>
+    </div>
     <script>
       $(function(){
         $('.logout').on('click',function(event){
            location.href = '{{ url_for("auth.logout") }}';
         });
+
+        $('.board').on('click',function(){
+          location.href = '{{ url_for("loginboard.board") }}';
+        });
       })
     </script>
     {% else %}
       <h3>환영합니다 로그인 또는 회원가입 후 서비스를 이용해주세요</h3>
+     <!-- 버튼 구간 -->
+    <div>
+      <button type="button" class="btn btn-primary login" data-toggle="modal" data-target="#loginModal">로그인</button>
+      <button type="button" class="btn btn-success register" data-toggle="modal" data-target="#registerModal">회원가입</button>
+    </div>
     {% endif%}
   </div>
 {#
@@ -40,11 +52,7 @@
                 {% endfor %}
             {%  endif %}
 {% endwith %}
-  <!-- 버튼 구간 -->
-  <div>
-    <button type="button" class="btn btn-primary login" data-toggle="modal" data-target="#loginModal">로그인</button>
-      <button type="button" class="btn btn-success register" data-toggle="modal" data-target="#registerModal">회원가입</button>
-  </div>
+
 
 <!-- 회원가입 모달 -->
   <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">

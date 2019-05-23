@@ -15,3 +15,11 @@ class LoginboardConfig(object):
     SESSION_COOKIE_NAME = 'loginboard_session'
     #: SESSION SECRET KEY
     SECRET_KEY = 'PG13'
+    #: SESSION을 관리할 방법 설정
+    SESSION_TYPE = 'sqlalchemy'
+    #: SESSION을 SQLALCHEMY로 관리할 테이블 이름
+    SESSION_SQLALCHEMY_TABLE = 'sessions'
+    #:
+    SQLALCHEMY_TRACK_MODIFICATIONS = 'False'
+
+

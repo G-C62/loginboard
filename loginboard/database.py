@@ -22,6 +22,7 @@ class DBManager:
     def init_db():
         # * import는 안되는듯하다
         from loginboard.model import user
+        from loginboard.model import post
         from loginboard.model import Base
         Base.metadata.create_all(bind=DBManager.__engine)
 
